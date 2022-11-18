@@ -4,6 +4,16 @@ import bludgeoningCrit from "../helpers/bludgeoningCrit.js";
 import slashingCrit from "../helpers/slashingCrit.js";
 import piercingCrit from "../helpers/piercingCrit.js";
 
+/* 
+Determines if a critical hit is confirmed, then rolls for the effect on the appropriate "weaponType" Crit table
+Two inputs with command:
+-Character level: Integer value from 1 to 20
+-Weapon type: 
+--"Bludgeoning"
+--"Piercing"
+--"Slashing"
+Returns the string results of the critical hit as confirmed or not, with appropriate messages based on "weaponType"
+*/
 const rollCriticalHit = (level, weaponType) => {
     const firstD100 = rollDice(100);
 

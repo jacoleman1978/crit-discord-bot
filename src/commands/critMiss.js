@@ -1,5 +1,10 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 
+/* 
+Setup for "cm" slash command. 
+One input with command:
+-Character level: Integer value from 1 to 20
+*/
 const cmCommand = new SlashCommandBuilder()
     .setName("cm")
     .setDescription("Checks if the miss is a regular miss or if the table should be used")

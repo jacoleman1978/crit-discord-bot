@@ -1,5 +1,14 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 
+/* 
+Setup for "ch" slash command. 
+Two inputs with command:
+-Character level: Integer value from 1 to 20
+-Weapon type: 
+--"Bludgeoning"
+--"Piercing"
+--"Slashing"
+*/
 const chCommand = new SlashCommandBuilder()
     .setName("ch")
     .setDescription("Checks if the hit is a regular critical or if the table should be used")

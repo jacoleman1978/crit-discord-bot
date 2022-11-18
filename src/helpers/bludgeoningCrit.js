@@ -1,5 +1,10 @@
 import rollDice from "./rollDice.js"
 
+/*
+Generates the confirmed critical hit effect for bludgeoning weapons, using 'http://deltasdnd.blogspot.com/2012/07/critical-hits.html?m=1'
+Input: "d100" is an integer from 1 to 100
+Returns a string based on the d100 input
+*/
 const bludgeoningCrit = (d100) => {
     if (d100 < 32) {
         return "x2 damage"

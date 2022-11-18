@@ -2,6 +2,12 @@ import rollDice from "../helpers/rollDice.js";
 import isCriticalMiss from "../helpers/isCriticalMiss.js";
 import fumbleTable from "../helpers/fumbleTable.js";
 
+/* 
+Determines if a critical miss is confirmed, then rolls for the effect on the fumble table
+Input:
+-Character level: Integer value from 1 to 20
+Returns the string results of the critical miss as confirmed or not
+*/
 const rollCriticalMiss = (level) => {
     const firstD100 = rollDice(100);
 
@@ -15,8 +21,10 @@ const rollCriticalMiss = (level) => {
             return message
 
         } else {
+            // 99 is roll twice on the table, ignoring 99 and 100
             let maxLength = 2;
 
+            // 100 is roll three times on the table, ignoring 99 and 100
             if (secondD100 === 100) {
                 maxLength = 3;
             }

@@ -1,5 +1,10 @@
 import rollDice from "./rollDice.js"
 
+/*
+Generates the confirmed critical miss effect, using 'http://deltasdnd.blogspot.com/2012/07/critical-hits.html?m=1'
+Input: "d100" is an integer from 1 to 100
+Returns a string based on the d100 input
+*/
 const fumbleTable = (d100) => {
     if (d100 < 20) {
         return `Slip. Roll dexterity or less on d20 or fall and be stunned for ${rollDice(4)} rounds.`
