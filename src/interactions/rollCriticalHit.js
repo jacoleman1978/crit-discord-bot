@@ -5,13 +5,11 @@ import slashingCrit from "../helpers/slashingCrit.js";
 import piercingCrit from "../helpers/piercingCrit.js";
 
 const rollCriticalHit = (level, weaponType) => {
-    console.log({level, weaponType})
     const firstD100 = rollDice(100);
 
     if (isCriticalHit(level, firstD100)) {
         const secondD100 = rollDice(100);
         let message = `${firstD100}%! It is a critical hit!\n${secondD100}% on the table: `
-        console.log(message)
 
         if (weaponType === "bludgeoning") {
             message += bludgeoningCrit(secondD100);
