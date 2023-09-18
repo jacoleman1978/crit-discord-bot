@@ -4,9 +4,11 @@ import { config } from "dotenv";
 import chCommand from "./commands/critHit.js";
 import cmCommand from "./commands/critMiss.js";
 import costCommand from "./commands/cost.js";
+import esCommand from "./commands/enemySaves.js";
 import rollCriticalHit from "./interactions/rollCriticalHit.js";
 import rollCriticalMiss from "./interactions/rollCriticalMiss.js";
 import rollMagicItemCost from "./interactions/rollMagicItemCost.js";
+import rollEnemySaves from "./interactions/rollEnemySaves.js";
 
 config();
 
@@ -46,6 +48,14 @@ client.on("interactionCreate", async (interaction) => {
             const rarity = interaction.options.get("rarity").value;
 
             await interaction.reply(rollMagicItemCost(rarity));
+
+        // Handles the "es" slash command
+        } else if (interaction.commandName === "es") {
+            const numEnemies = interaction.options.get("num-enemies").value;
+            const saveModifier = interaction.options.get("save-modifier").value;
+            const target = interaction.options.get("target").value;
+
+            await interaction.reply(rollEnemySaves(numEnemies, saveModifier, target));
         }
     
     // Does not react to other interactions
@@ -58,7 +68,7 @@ const main = async () => {
     try{
         // Builds and displays the ch, cm and cost commands, waiting for user interaction
         await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {
-            body: [chCommand, cmCommand, costCommand]
+            body: [chCommand, cmCommand, costCommand, esCommand]
         });
 
         client.login(BOT_TOKEN);
