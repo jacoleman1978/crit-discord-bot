@@ -53,9 +53,10 @@ client.on("interactionCreate", async (interaction) => {
         } else if (interaction.commandName === "es") {
             const numEnemies = interaction.options.get("num-enemies").value;
             const saveModifier = interaction.options.get("save-modifier").value;
+            const advantageType = interaction.options.get("advantage-type").value;
             const target = interaction.options.get("target").value;
 
-            await interaction.reply(rollEnemySaves(numEnemies, saveModifier, target));
+            await interaction.reply(rollEnemySaves(numEnemies, saveModifier, advantageType, target));
         }
     
     // Does not react to other interactions
