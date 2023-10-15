@@ -43,10 +43,10 @@ const rollEnemySaves = (numEnemies, saveModifier, advantageType, target) => {
         }
     }
 
-    savedIDs = savedIDs.slice(0, -2);
-    failedIDs = failedIDs.slice(0, -2);
-    critHitIDs = critHitIDs.slice(0, -2);
-    critMissIDs = critMissIDs.slice(0, -2);
+    savedIDs = savedIDs.length > 0 ? savedIDs.slice(0, -2): "None";
+    failedIDs = failedIDs.length > 0 ? failedIDs.slice(0, -2): "None";
+    critHitIDs = critHitIDs.length > 0 ? critHitIDs.slice(0, -2): "None";
+    critMissIDs = critMissIDs.length > 0 ? critMissIDs.slice(0, -2): "None";
 
     return `Target DC: ${target}\nNumber successful: ${numSaved} with ids: ${savedIDs} \nNumber failed: ${numFailed} with ids: ${failedIDs}\nCrit hits: ${critHitIDs}\nCrit misses: ${critMissIDs}`;
 }
