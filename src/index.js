@@ -3,10 +3,12 @@ import { REST } from "@discordjs/rest";
 import { config } from "dotenv";
 import chCommand from "./commands/critHit.js";
 import cmCommand from "./commands/critMiss.js";
+import cmagCommand from "./commands/critMagic.js";
 import costCommand from "./commands/cost.js";
 import esCommand from "./commands/enemySaves.js";
 import rollCriticalHit from "./interactions/rollCriticalHit.js";
 import rollCriticalMiss from "./interactions/rollCriticalMiss.js";
+import rollCriticalMagic from "./interactions/rollCriticalMagic.js";
 import rollMagicItemCost from "./interactions/rollMagicItemCost.js";
 import rollEnemySaves from "./interactions/rollEnemySaves.js";
 
@@ -57,6 +59,14 @@ client.on("interactionCreate", async (interaction) => {
             const target = interaction.options.get("target").value;
 
             await interaction.reply(rollEnemySaves(numEnemies, saveModifier, advantageType, target));
+
+        // Handles the "cmag" slash command
+        } else if (interaction.commandName === "cmag") {
+            const critType = interaction.options.get("crit-type").value;
+            const charLevel = interaction.options.get("char-level").value;
+            const spellLevel = interaction.options.get("spell-level").value;
+
+            await interaction.reply(rollCriticalMagic(critType, charLevel, spellLevel));
         }
     
     // Does not react to other interactions
@@ -67,9 +77,9 @@ client.on("interactionCreate", async (interaction) => {
 
 const main = async () => {
     try{
-        // Builds and displays the ch, cm and cost commands, waiting for user interaction
+        // Builds and displays the ch, cm, cmag, es and cost commands, waiting for user interaction
         await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {
-            body: [chCommand, cmCommand, costCommand, esCommand]
+            body: [chCommand, cmCommand, costCommand, esCommand, cmagCommand]
         });
 
         client.login(BOT_TOKEN);
