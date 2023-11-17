@@ -17,7 +17,10 @@ const rollCriticalMagic = (critType, charLevel, spellLevel) => {
     } else {
         if (isCriticalMiss(charLevel, firstD100)) {
             const secondD100 = rollDice(100);
-            return `It is a critical miss!\n${secondD100}% on the table: ${magicFumbleTable(spellLevel, secondD100)}`;
+            const fumble = magicFumbleTable(spellLevel, secondD100);
+            const description = fumble.description;
+            const effect = fumble.effect;
+            return `It is a critical miss!\n${secondD100}% on the table: \nDescription: ${description}\nEffect: ${effect}`;
         } else {
             return `It is just a normal critical miss. You rolled ${firstD100}%.`;
         }
