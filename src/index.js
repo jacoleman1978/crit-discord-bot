@@ -7,12 +7,14 @@ import cmagCommand from "./commands/critMagic.js";
 import costCommand from "./commands/cost.js";
 import esCommand from "./commands/enemySaves.js";
 import findItemCommand from "./commands/findItem.js";
+import newStatSetCommand from "./commands/newStatSet.js";
 import rollCriticalHit from "./interactions/rollCriticalHit.js";
 import rollCriticalMiss from "./interactions/rollCriticalMiss.js";
 import rollCriticalMagic from "./interactions/rollCriticalMagic.js";
 import rollMagicItemCost from "./interactions/rollMagicItemCost.js";
 import rollEnemySaves from "./interactions/rollEnemySaves.js";
 import rollFindItem from "./interactions/rollFindItem.js";
+import rollNewStatSet from "./interactions/rollNewStatSet.js";
 
 config();
 
@@ -75,6 +77,10 @@ client.on("interactionCreate", async (interaction) => {
             const inSigil = interaction.options.get("is-in-sigil").value;
 
             await interaction.reply(rollFindItem(rarity, inSigil));
+        // Handles the "new-stat-set" slash command
+        } else if (interaction.commandName === "new-stat-set") {
+
+            await interaction.reply(rollNewStatSet());
         }
     
     // Does not react to other interactions
@@ -87,7 +93,7 @@ const main = async () => {
     try{
         // Builds and displays the ch, cm, cmag, es and cost commands, waiting for user interaction
         await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {
-            body: [chCommand, cmCommand, costCommand, esCommand, cmagCommand, findItemCommand]
+            body: [chCommand, cmCommand, costCommand, esCommand, cmagCommand, findItemCommand, newStatSetCommand]
         });
 
         client.login(BOT_TOKEN);
