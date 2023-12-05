@@ -6,11 +6,13 @@ import cmCommand from "./commands/critMiss.js";
 import cmagCommand from "./commands/critMagic.js";
 import costCommand from "./commands/cost.js";
 import esCommand from "./commands/enemySaves.js";
+import findItemCommand from "./commands/findItem.js";
 import rollCriticalHit from "./interactions/rollCriticalHit.js";
 import rollCriticalMiss from "./interactions/rollCriticalMiss.js";
 import rollCriticalMagic from "./interactions/rollCriticalMagic.js";
 import rollMagicItemCost from "./interactions/rollMagicItemCost.js";
 import rollEnemySaves from "./interactions/rollEnemySaves.js";
+import rollFindItem from "./interactions/rollFindItem.js";
 
 config();
 
@@ -67,6 +69,12 @@ client.on("interactionCreate", async (interaction) => {
             const spellLevel = interaction.options.get("spell-level").value;
 
             await interaction.reply(rollCriticalMagic(critType, charLevel, spellLevel));
+        // Handles the "find" slash command
+        } else if (interaction.commandName === "find") {
+            const rarity = interaction.options.get("rarity").value;
+            const inSigil = interaction.options.get("is-in-sigil").value;
+
+            await interaction.reply(rollFindItem(rarity, inSigil));
         }
     
     // Does not react to other interactions
@@ -79,7 +87,7 @@ const main = async () => {
     try{
         // Builds and displays the ch, cm, cmag, es and cost commands, waiting for user interaction
         await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {
-            body: [chCommand, cmCommand, costCommand, esCommand, cmagCommand]
+            body: [chCommand, cmCommand, costCommand, esCommand, cmagCommand, findItemCommand]
         });
 
         client.login(BOT_TOKEN);

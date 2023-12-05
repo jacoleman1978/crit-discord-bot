@@ -3,12 +3,12 @@ import rollDice from "../helpers/rollDice.js";
 /*
 Determines the cost for a magic item, depending on the rarity and the appropriate formula with dice roll(s).
 One input with command:
--Rarity: 
---"Common"
---"Uncommon"
---"Rare"
---"Very rare"
---"Legendary"
+-rarity: 
+--"common"
+--"uncommon"
+--"rare"
+--"very-rare"
+--"legendary"
 Returns the string results of the magic item cost, depending on the rarity selected and the appropriate formula with dice roll(s).
 */
 const rollMagicItemCost = (rarity) => {
