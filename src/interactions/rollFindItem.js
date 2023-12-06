@@ -1,5 +1,28 @@
 import rollDice from "../helpers/rollDice.js";
 
+const rarityMap = {
+    "common": {
+        "max": 50,
+        "name": "Common"
+    },
+    "uncommon": {
+        "max": 30,
+        "name": "Uncommon"
+    },
+    "rare": {
+        "max": 15,
+        "name": "Rare"
+    },
+    "very-rare": {
+        "max": 10,
+        "name": "Very rare"
+    },
+    "legendary": {
+        "max": 1,
+        "name": "Legendary"
+    }
+};
+
 /*
 Determines whether a magic item can be found in a store, depending on the rarity and the appropriate formula with dice roll(s).
 Two inputs with command:
@@ -13,25 +36,20 @@ Two inputs with command:
 Returns the string results of the magic item cost, depending on the rarity selected and the appropriate formula with dice roll(s).
 */
 const rollFindItem = (rarity, inSigil) => {
-    let difference = Math.abs(rollDice(100) - rollDice(100));
+    const percentOne = rollDice(100);
+    const percentTwo = rollDice(100);
+
+    let difference = Math.abs(percentOne - percentTwo);
 
     if (inSigil) {
         difference -= 5;
     }
 
-    if (rarity === "common" && difference <= 50) {
-        return `Common magic item found!`;
-    } else if (rarity === "uncommon" && difference <= 30) {
-        return `Uncommon magic item found!`;
-    } else if (rarity === "rare" && difference <= 15) {
-        return `Rare magic item found!`;
-    } else if (rarity === "very-rare" && difference <= 10) {
-        return `Very rare magic item found!`;
-    } else if (rarity === "legendary" && difference <= 1) {
-        return `Legendary magic item found!`;
-    }
+    if (difference <= rarityMap[rarity].max) {
+        return `Rolled ${percentOne} and ${percentTwo}. ${rarityMap[rarity].name} magic item found!`;
+    } 
 
-    return `No magic item found. Please check back another day.`;
+    return `Rolled ${percentOne} and ${percentTwo}. ${rarityMap[rarity].name} magic item not found. Please check back another day.`;
 };
 
 export default rollFindItem;
