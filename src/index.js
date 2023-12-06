@@ -5,14 +5,16 @@ import chCommand from "./commands/critHit.js";
 import cmCommand from "./commands/critMiss.js";
 import cmagCommand from "./commands/critMagic.js";
 import costCommand from "./commands/cost.js";
-import esCommand from "./commands/enemySaves.js";
+import groupSavesCommand from "./commands/groupSaves.js";
+import groupAttacksCommand from "./commands/groupAttacks.js";
 import findItemCommand from "./commands/findItem.js";
 import newStatSetCommand from "./commands/newStatSet.js";
 import rollCriticalHit from "./interactions/rollCriticalHit.js";
 import rollCriticalMiss from "./interactions/rollCriticalMiss.js";
 import rollCriticalMagic from "./interactions/rollCriticalMagic.js";
 import rollMagicItemCost from "./interactions/rollMagicItemCost.js";
-import rollEnemySaves from "./interactions/rollEnemySaves.js";
+import rollGroupSaves from "./interactions/rollGroupSaves.js";
+import rollGroupAttacks from "./interactions/rollGroupAttacks.js";
 import rollFindItem from "./interactions/rollFindItem.js";
 import rollNewStatSet from "./interactions/rollNewStatSet.js";
 
@@ -55,15 +57,21 @@ client.on("interactionCreate", async (interaction) => {
 
             await interaction.reply(rollMagicItemCost(rarity));
 
-        // Handles the "es" slash command
-        } else if (interaction.commandName === "es") {
-            const numEnemies = interaction.options.get("num-enemies").value;
+        // Handles the "group-saves" slash command
+        } else if (interaction.commandName === "group-saves") {
+            const groupSize = interaction.options.get("group-size").value;
             const saveModifier = interaction.options.get("save-modifier").value;
             const advantageType = interaction.options.get("advantage-type").value;
             const target = interaction.options.get("target").value;
 
-            await interaction.reply(rollEnemySaves(numEnemies, saveModifier, advantageType, target));
+            await interaction.reply(rollGroupSaves(groupSize, saveModifier, advantageType, target));
+        } else if (interaction.commandName === "group-attacks") {
+            const groupSize = interaction.options.get("group-size").value;
+            const attackModifier = interaction.options.get("attack-modifier").value;
+            const advantageType = interaction.options.get("advantage-type").value;
+            const targetAC = interaction.options.get("target-ac").value;
 
+            await interaction.reply(rollGroupAttacks(groupSize, attackModifier, advantageType, targetAC));
         // Handles the "cmag" slash command
         } else if (interaction.commandName === "cmag") {
             const critType = interaction.options.get("crit-type").value;
@@ -93,7 +101,7 @@ const main = async () => {
     try{
         // Builds and displays the ch, cm, cmag, es and cost commands, waiting for user interaction
         await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {
-            body: [chCommand, cmCommand, costCommand, esCommand, cmagCommand, findItemCommand, newStatSetCommand]
+            body: [chCommand, cmCommand, costCommand, groupSavesCommand, groupAttacksCommand, cmagCommand, findItemCommand, newStatSetCommand]
         });
 
         client.login(BOT_TOKEN);

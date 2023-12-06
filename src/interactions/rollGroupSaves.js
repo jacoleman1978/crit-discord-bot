@@ -8,13 +8,11 @@ import rollDice from "../helpers/rollDice.js";
  * @param {required} target Integer value from 8 to 50
  * @returns string results of the number of enemies that passed or failed their save
  */
-const rollEnemySaves = (numEnemies, saveModifier, advantageType, target) => {
+const rollGroupSaves = (numEnemies, saveModifier, advantageType, target) => {
     let numSaved = 0;
     let numFailed = 0;
     let savedIDs = "";
     let failedIDs = "";
-    let critHitIDs = "";
-    let critMissIDs = "";
 
     for (let i = 0; i < numEnemies; i++) {
         const rollOne = rollDice(20);
@@ -28,12 +26,6 @@ const rollEnemySaves = (numEnemies, saveModifier, advantageType, target) => {
             keptRoll = rollOne < rollTwo ? rollOne : rollTwo;
         }
 
-        if (keptRoll === 20) {
-            critHitIDs += `${i + 1}, `;
-        } else if (keptRoll === 1) {
-            critMissIDs += `${i + 1}, `;
-        }
-
         if (rollDice(20) + saveModifier >= target) {
             numSaved++;
             savedIDs += `${i + 1}, `;
@@ -45,10 +37,8 @@ const rollEnemySaves = (numEnemies, saveModifier, advantageType, target) => {
 
     savedIDs = savedIDs.length > 0 ? savedIDs.slice(0, -2): "None";
     failedIDs = failedIDs.length > 0 ? failedIDs.slice(0, -2): "None";
-    critHitIDs = critHitIDs.length > 0 ? critHitIDs.slice(0, -2): "None";
-    critMissIDs = critMissIDs.length > 0 ? critMissIDs.slice(0, -2): "None";
 
-    return `Target DC: ${target}\nNumber successful: ${numSaved} with ids: ${savedIDs} \nNumber failed: ${numFailed} with ids: ${failedIDs}\nCrit hits: ${critHitIDs}\nCrit misses: ${critMissIDs}`;
+    return `Target DC: ${target}\nNumber successful: ${numSaved} with ids: ${savedIDs} \nNumber failed: ${numFailed} with ids: ${failedIDs}`;
 }
 
-export default  rollEnemySaves;
+export default  rollGroupSaves;
