@@ -19,13 +19,13 @@ const rollFindItem = (rarity, inSigil) => {
         difference -= 5;
     }
 
-    if (rarity === "common" && difference <= 40) {
+    if (rarity === "common" && difference <= 50) {
         return `Common magic item found!`;
     } else if (rarity === "uncommon" && difference <= 30) {
         return `Uncommon magic item found!`;
     } else if (rarity === "rare" && difference <= 15) {
         return `Rare magic item found!`;
-    } else if (rarity === "very-rare" && difference <= 5) {
+    } else if (rarity === "very-rare" && difference <= 10) {
         return `Very rare magic item found!`;
     } else if (rarity === "legendary" && difference <= 1) {
         return `Legendary magic item found!`;
