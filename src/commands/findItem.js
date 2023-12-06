@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 
 /*
-Setup for "find" slash command.
+Setup for "find-item" slash command.
 One input with command:
 -Rarity: 
 --"Common"
@@ -11,7 +11,7 @@ One input with command:
 --"Legendary"
 */
 const findItemCommand = new SlashCommandBuilder()
-    .setName("find")
+    .setName("find-item")
     .setDescription("Determines if a store has a magic item in stock")
     .addStringOption((option) => option.setName("rarity").setDescription("Rarity").setRequired(true).setChoices(
         {name: "Common", value: "common"},

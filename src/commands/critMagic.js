@@ -1,12 +1,12 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 
 /* 
-Setup for "cmag" slash command. 
+Setup for "crit-magic" slash command. 
 One input with command:
 -Character level: Integer value from 0 to 9
 */
 const cmagCommand = new SlashCommandBuilder()
-    .setName("cmag")
+    .setName("crit-magic")
     .setDescription("Checks if the magical miss is a regular miss or if the table should be used")
     .addStringOption((option) => option.setName("crit-type").setDescription("Critical Type").setRequired(true).setChoices(
         {name: "Critical Hit", value: "critical-hit"},

@@ -45,7 +45,7 @@ const rollCriticalMiss = (level) => {
         return message
 
     } else {
-        return `You rolled ${firstD100}%. You are safe from futher self-inflicted mishaps...for this round....`
+        return `You rolled ${firstD100}%. You are safe from futher self-inflicted mishaps...for now....`
     }
 }
 

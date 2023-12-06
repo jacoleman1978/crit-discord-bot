@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 
 /* 
-Setup for "ch" slash command. 
+Setup for "crit-hit" slash command. 
 Two inputs with command:
 -Character level: Integer value from 1 to 20
 -Weapon type: 
@@ -10,7 +10,7 @@ Two inputs with command:
 --"Slashing"
 */
 const chCommand = new SlashCommandBuilder()
-    .setName("ch")
+    .setName("crit-hit")
     .setDescription("Checks if the hit is a regular critical or if the table should be used")
     .addIntegerOption((option) => option.setName("level").setDescription("Character Level").setRequired(true).setChoices(
         {name: "1", value: 1},
