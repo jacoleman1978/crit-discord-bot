@@ -22,7 +22,7 @@ const rollStatSet = () => {
     let statSet = [];
     let maxStat = 0;
 
-    while (total < 68 || total > 78 || maxStat < 15) {
+    while (total < 72 || total > 80 || maxStat < 15) {
         statSet = [];
 
         for (let i = 0; i < 6; i++) {
